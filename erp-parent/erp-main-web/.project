@@ -3,6 +3,7 @@
 	<name>erp-main-web</name>
 	<comment></comment>
 	<projects>
+		<project>erp-lib-common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

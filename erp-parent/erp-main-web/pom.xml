@@ -48,9 +48,9 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-        </dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
@@ -61,21 +61,81 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		<!-- ERP Common Library-->
-	     <dependency>
-            <groupId>com.snowgol.erp</groupId>
-            <artifactId>erp-lib-common</artifactId>
-             <version>1.0-SNAPSHOT</version>
-        </dependency>
+
+		<!-- ERP Common Library -->
+		<dependency>
+			<groupId>com.snowgol.erp</groupId>
+			<artifactId>erp-lib-common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<workingDirectory>src/main/webapp</workingDirectory>
+					<installDirectory>target</installDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<!-- optional: you don't really need execution ids, but it looks nice 
+							in your build log. -->
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<!-- optional: default phase is "generate-resources" -->
+						<phase>generate-resources</phase>
+						<configuration>
+							<nodeVersion>v12.14.1</nodeVersion>
+
+							<!-- optional: with node version greater than 4.0.0 will use npm provided 
+								by node distribution <npmVersion>2.15.9</npmVersion> -->
+
+							<!-- optional: where to download node and npm from. Defaults to https://nodejs.org/dist/ 
+								<downloadRoot>http://myproxy.example.org/nodejs/</downloadRoot> -->
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+
+						<!-- optional: default phase is "generate-resources" -->
+						<phase>generate-resources</phase>
+
+						<configuration>
+							<!-- optional: The default argument is actually "install", so unless 
+								you need to run some other npm command, you can remove this whole <configuration> 
+								section. -->
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<attachClasses>true</attachClasses>
+							<webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+						</configuration>
+						<goals>
+							<goal>inplace</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
