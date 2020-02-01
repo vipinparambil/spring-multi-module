@@ -48,8 +48,8 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mssql-jdbc</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -89,18 +89,21 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>npm install</id>
+						<id>npm 
+		install</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>npm run build</id>
+						<id>npm 
+		run build</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>run build</arguments>
+							<arguments>run
+								build</arguments>
 						</configuration>
 					</execution>
 					<execution>
@@ -115,7 +118,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -148,7 +150,7 @@
 							<outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
 							<resources>
 								<resource>
-									<directory>${project.parent.basedir}/src/main/webapp/dist/erp-np-app</directory>
+									<directory>${project.basedir}/src/main/webapp/dist/erp-np-app</directory>
 								</resource>
 							</resources>
 						</configuration>
