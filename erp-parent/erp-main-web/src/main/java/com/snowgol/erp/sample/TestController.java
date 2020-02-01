@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @GetMapping(value ="/")
-    public String onReady() {
-        return "Comming Soon...!!!";
-    }
+	@GetMapping(value = "/test")
+	public String onReady() {
+		return "Comming Soon...!!!";
+	}
 
 }
